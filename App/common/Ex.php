@@ -4,8 +4,12 @@ namespace App\common;
 
 class Ex extends \Exception
 {
-    function __construct(string $msg = '', string $extraMsg = '')
+    protected $data;
+
+    function __construct(string $msg, string $extraMsg = '')
     {
+        $this->data = $extraMsg;
+        
         parent::__construct($msg, $this->getErrCode($msg));
     }
 
