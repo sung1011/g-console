@@ -1,9 +1,9 @@
 <?php
 namespace App;
 
-use Symfony\Component\Console\Application as console;
-use Symfony\Component\Console\Command\Command as command;
-use Pimple\Container;
+// use Pimple\Container; // pimple is too simple and not grace, Symfony/Dependency-Injection is better ! abandon it(pimple) !    T.T
+use Symfony\Component\Console\Application as Symfonyconsole;
+use Symfony\Component\DependencyInjection\ContainerBuilder as Di;
 
 class Application
 {
@@ -22,7 +22,6 @@ class Application
 
     public function doRun()
     {
-        $container = $this->getContainer();
         //config
         $this->initConfig();
         //server
@@ -38,36 +37,29 @@ class Application
 
     private function initServer()
     {
-        $c = $this->getContainer();
-        $c['server.ssh'] = function () {
-            return new \App\server\Ssh;
-        };
+        $di = $this->getDI();
+        $di->register('server.ssh', 'App\server\Ssh');
     }
 
     private function initConsole()
     {
-        // instance
-        $c = $this->getContainer();
-        $c['console'] = function () {
-            return new console;
-        };
-        $c['console.demo'] = function () {
-            return new \App\console\Demo;
-        };
-        $c['console.taillog'] = function () {
-            return new \App\console\Taillog;
-        };
-        $c['console.diy'] = function () {
-            return new \App\console\Diy;
-        };
+        //instance
+        $di = $this->getDI();
+        $di->register('console', 'Symfony\Component\Console\Application');
+        $di->register('console.test', '\App\console\Test');
+        $di->register('console.demo', '\App\console\Demo');
+        $di->register('console.taillog', '\App\console\Taillog');
+        $di->register('console.diy', '\App\console\Diy');
 
         // set in console
-        $console = $c['console'];
+        $console = $di->get('console');
         $console->addCommands([
-            $c['console.demo'],
-            $c['console.taillog'],
-            $c['console.diy']
+            $di->get('console.test'),
+            $di->get('console.demo'),
+            $di->get('console.diy'),
+            $di->get('console.taillog'),
         ]);
+
 
         // config console
         $console->setCatchExceptions(false);
@@ -75,10 +67,10 @@ class Application
         $console->run();
     }
 
-    static function getContainer()
+    static function getDI()
     {
         if (!self::$container) {
-            self::$container = new Container;
+            self::$container = new Di;
         }
         return self::$container;
     }

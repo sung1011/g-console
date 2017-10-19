@@ -7,11 +7,13 @@ class Main
 {
     public static function get(string $file)
     {
-        $c = getContainer();
+        $di = getDI();
 
-        if (!isset($c['server.' . $file])) {
+        $name = 'server.' . $file;
+
+        if (!$di->has($name)) {
             throw new ex('server_file_not_found', $file);
         }
-        return $c['server.' . $file];
+        return $di->get($name);
     }
 }

@@ -10,9 +10,9 @@ define('DEBUG', true);
 //     return App\Application::getInstance();
 // }
 
-function getContainer()
+function getDI()
 {
-    return App\Application::getContainer();
+    return App\Application::getDI();
 }
 
 $app = App\Application::getInstance();

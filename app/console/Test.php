@@ -6,16 +6,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Command\Command;
 
-class Diy extends Command
+class Test extends Command
 {
     protected function configure()
     {
         $this
-        ->setName('diy')
-
-        ->addArgument('cmd', InputArgument::REQUIRED, 'input any cmd')
-
-        ->addOption('ssh', 'hn', InputArgument::OPTIONAL, 'switch host name', 'dev')
+        ->setName('test')
 
         ->setDescription('do it by yourself')
 
@@ -25,11 +21,5 @@ class Diy extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $cmd = $input->getArgument('cmd');
-
-        $ssh = \App\server\Main::get('ssh');
-        $ssh->handle($cmd, $input->getOption('ssh'));
-
-        $output->write($ssh->stdOut());
     }
 }

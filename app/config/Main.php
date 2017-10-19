@@ -7,35 +7,36 @@ class Main
 {
     public static function init()
     {
-        $c = getContainer();
+        $di = getDI();
 
         $files = array_diff(scandir(__DIR__), ['.', '..', basename(__FILE__)]);
 
         foreach ($files as $file) {
             $f = basename($file, '.php');
-            $c['config.' . $f] = require __DIR__ . '/' . $file;
+            $di->set('config.' . $f, require __DIR__ . '/' . $file);
         }
     }
 
     public static function get($file, $k = null)
     {
-        $c = getContainer();
+        $di = getDI();
 
+        $name = 'config.' . $file;
         $rs = null;
 
         // get config
-        if (!isset($c['config.' . $file])) {
+        if (!$di->has($name)) {
             throw new ex('config_file_not_found', $file);
         } else {
-            $rs = $c['config.' . $file];
+            $rs = $di->get($name);
         }
 
         // get config val
         if ($k) {
-            if (!isset($c['config.' . $file][$k])) {
+            if (!isset($di->get($name)[$k])) {
                 throw new ex('config_key_not_found', $k);
             }else {
-                $rs = $c['config.' . $file][$k];
+                $rs = $di->get($name)[$k];
             }
         }
 
