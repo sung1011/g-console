@@ -1,0 +1,5 @@
+parameters:
+    
+services:
+    server.ssh:
+        class:  App\server\Ssh

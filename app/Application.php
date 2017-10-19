@@ -4,6 +4,8 @@ namespace App;
 // use Pimple\Container; // pimple is too simple and not grace, Symfony/Dependency-Injection is better ! abandon it(pimple) !    T.T
 use Symfony\Component\Console\Application as Symfonyconsole;
 use Symfony\Component\DependencyInjection\ContainerBuilder as Di;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 
 class Application
 {
@@ -22,12 +24,20 @@ class Application
 
     public function doRun()
     {
+        $this->load();
         //config
         $this->initConfig();
         //server
-        $this->initServer();
+        // $this->initServer();
         //console
         $this->initConsole();
+    }
+
+    private function load()
+    {
+        $di = getDI();
+        $loader = new PhpFileLoader($di, new FileLocator(__DIR__));
+        $loader->load('App\config\di.yml');
     }
 
     private function initConfig()
