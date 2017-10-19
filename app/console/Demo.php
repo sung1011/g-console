@@ -1,5 +1,5 @@
 <?php
-namespace App;
+namespace App\console;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;

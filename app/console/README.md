@@ -1,5 +1,10 @@
-# TODO
+# console
+--------------
+console is a controller
 
-1. tail log  
-2. pull code  
-3. customize shell
+## todo
+- pull code  
+
+## done
+- tail log  
+- customize shell

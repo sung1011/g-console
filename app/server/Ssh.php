@@ -17,14 +17,19 @@ class Ssh
     protected $_stdOut;
     protected $_stdErr;
 
+    private $_hostName;
     private $_host;
     private $_user;
     private $_pwd;
     private $_port;
 
-    private function getConf($key)
+    private $_debug;
+
+    private function getConf($hostName)
     {
-        $conf = conf::get('ssh', $key);
+        $this->_hostName = $hostName;
+
+        $conf = conf::get('ssh', $hostName);
 
         //TODO chk:host, user, pwd, port
 
@@ -34,9 +39,9 @@ class Ssh
         $this->_port = $conf['port'];
     }
 
-    private function getConn($key)
+    private function getConn($hostName)
     {
-        $this->getConf($key);
+        $this->getConf($hostName);
 
         if (!$this->_conn) {
             $conn = ssh2_connect($this->_host, $this->_port);
@@ -48,6 +53,8 @@ class Ssh
 
     public function handle($cmd, $connKey)
     {
+        $this->_cmd = $cmd;
+
         $conn = $this->getConn($connKey);
         $this->_stream = ssh2_exec($conn, $cmd);
         $this->_errorStream = ssh2_fetch_stream($this->_stream, SSH2_STREAM_STDERR);
@@ -65,14 +72,22 @@ class Ssh
         }
 
         if(DEBUG) {
-            $this->stdAppend($cmd);
+            $this->stdAppend($this->getDebug());
         }
+    }
+
+    private function getDebug()
+    {
+        $rs = '--------------------debug--------------------' . PHP_EOL;
+        $rs .= '[debug] cmd: ' . $this->_cmd . PHP_EOL;
+        $rs .= '[debug] hostname: ' . $this->_hostName . PHP_EOL;
+        return $rs;
     }
 
     private function stdAppend($str)
     {
-        $this->_stdOut .= '--------------------' . PHP_EOL . $str;
-        $this->_stdErr .= '--------------------' . PHP_EOL . $str;
+        $this->_stdOut .= $str;
+        $this->_stdErr .= $str;
     }
 
     public function stdOut($showCmd = false)

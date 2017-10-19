@@ -1,8 +1,11 @@
 {
-    "name": "tickles/console",
+    "name": "tickles/g-console",
     "type": "a console toolbox",
     "keywords": [
-        "symfony", "console", "ssh2", "php"
+        "symfony",
+        "console",
+        "ssh2",
+        "php"
     ],
     "description": "_",
     "homepage": "https://github.com/sung1011/?",
@@ -14,7 +17,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "App\\":"App/"
+            "App\\": "App/"
         }
     },
     "require": {

@@ -52,7 +52,7 @@ class Application
             return new console;
         };
         $c['console.demo'] = function () {
-            return new Demo;
+            return new \App\console\Demo;
         };
         $c['console.taillog'] = function () {
             return new \App\console\Taillog;
