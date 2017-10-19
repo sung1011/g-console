@@ -1,7 +1,6 @@
 {
     "name": "sung1011/g-console",
     "type": "app",
-    "version": "1.0.0",
     "keywords": [
         "symfony",
         "console",
@@ -9,10 +8,10 @@
         "php"
     ],
     "description": "_",
-    "homepage": "https://github.com/sung1011/?",
+    "homepage": "https://sung1011.github.io",
     "authors": [
         {
-            "name": "tickles",
+            "name": "sung1011",
             "email": "sung1011@gmail.com"
         }
     ],
@@ -26,11 +25,5 @@
         "symfony/console": "~3.3",
         "symfony/var-dumper": "~3.3",
         "pimple/pimple": "^3.2"
-    },
-    "repositories": {
-        "packagist": {
-            "type": "composer",
-            "url": "https://packagist.phpcomposer.com"
-        }
     }
 }
