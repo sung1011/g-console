@@ -25,5 +25,11 @@
         "symfony/console": "~3.3",
         "symfony/var-dumper": "~3.3",
         "pimple/pimple": "^3.2"
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://packagist.phpcomposer.com"
+        }
     }
 }
