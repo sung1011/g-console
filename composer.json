@@ -1,6 +1,6 @@
 {
     "name": "sung1011/g-console",
-    "type": "a console toolbox",
+    "type": "app",
     "keywords": [
         "symfony",
         "console",
