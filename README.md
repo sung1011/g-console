@@ -12,4 +12,6 @@ Make sure to place the $HOME/.composer/vendor/bin directory (or the equivalent d
 
 ## Quickstart
 
-1. sung demo
+``` bash
+sung demo
+```
