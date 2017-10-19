@@ -1,6 +1,7 @@
 {
     "name": "sung1011/g-console",
     "type": "app",
+    "version": "1.0.0",
     "keywords": [
         "symfony",
         "console",
