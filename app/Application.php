@@ -41,7 +41,7 @@ class Application
         $loader = new YamlFileLoader($di, new FileLocator(__DIR__ . '/config'));
         $loader->load('di.yml');
 
-        throw new common\Ex('test_ex');
+        //throw new common\Ex('test_ex');
     }
 
     private function initConsole()
