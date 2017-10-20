@@ -1,5 +1,5 @@
-App/config/ssh.php
+App/config/ssh.yml
 tags
 .tags
-vendor
 composer.lock
+vendor

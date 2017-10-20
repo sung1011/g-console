@@ -5,7 +5,9 @@ namespace App;
 use Symfony\Component\Console\Application as Symfonyconsole;
 use Symfony\Component\DependencyInjection\ContainerBuilder as Di;
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\DirectoryLoader;
+use Symfony\Component\Yaml\Yaml;
 
 class Application
 {
@@ -25,10 +27,6 @@ class Application
     public function doRun()
     {
         $this->load();
-        //config
-        $this->initConfig();
-        //server
-        // $this->initServer();
         //console
         $this->initConsole();
     }
@@ -36,31 +34,19 @@ class Application
     private function load()
     {
         $di = getDI();
-        $loader = new PhpFileLoader($di, new FileLocator(__DIR__));
-        $loader->load('App\config\di.yml');
-    }
+        //config
+        $di->set('config.ssh', Yaml::parse(file_get_contents(__DIR__ . '/config/ssh.yml')));
+        $di->set('config.errcode', Yaml::parse(file_get_contents(__DIR__ . '/config/errcode.yml')));
+        //service
+        $loader = new YamlFileLoader($di, new FileLocator(__DIR__ . '/config'));
+        $loader->load('di.yml');
 
-    private function initConfig()
-    {
-        config\Main::init();
-    }
-
-    private function initServer()
-    {
-        $di = $this->getDI();
-        $di->register('server.ssh', 'App\server\Ssh');
+        // throw new common\Ex('test_ex');
     }
 
     private function initConsole()
     {
-        //instance
-        $di = $this->getDI();
-        $di->register('console', 'Symfony\Component\Console\Application');
-        $di->register('console.test', '\App\console\Test');
-        $di->register('console.demo', '\App\console\Demo');
-        $di->register('console.taillog', '\App\console\Taillog');
-        $di->register('console.diy', '\App\console\Diy');
-
+        $di = getDI();
         // set in console
         $console = $di->get('console');
         $console->addCommands([
@@ -69,7 +55,6 @@ class Application
             $di->get('console.diy'),
             $di->get('console.taillog'),
         ]);
-
 
         // config console
         $console->setCatchExceptions(false);

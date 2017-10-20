@@ -1,5 +1,15 @@
 parameters:
-    
+
 services:
     server.ssh:
         class:  App\server\Ssh
+    console:
+        class:  Symfony\Component\Console\Application
+    console.test:
+        class: \App\console\Test
+    console.demo:
+        class: \App\console\Demo
+    console.taillog:
+        class: \App\console\Taillog
+    console.diy:
+        class: \App\console\Diy

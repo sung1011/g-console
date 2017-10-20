@@ -9,13 +9,13 @@ class Ex extends \Exception
     function __construct(string $msg, string $extraMsg = '')
     {
         $this->data = $extraMsg;
-        
+
         parent::__construct($msg, $this->getErrCode($msg));
     }
 
     private function getErrCode($msg)
     {
-        $c = getDI();
-        return $c['config.errcode'][$msg] ?? 0 ;
+        $di = getDI();
+        return $di->get('config.errcode')[$msg] ?? 0 ;
     }
 }

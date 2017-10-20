@@ -1,8 +1,6 @@
 <?php
 namespace App\server;
 
-use \App\config\Main as conf;
-
 /**
 * php ssh server类
 * require 需要安装ssh2拓展
@@ -29,7 +27,14 @@ class Ssh
     {
         $this->_hostName = $hostName;
 
-        $conf = conf::get('ssh', $hostName);
+        $di = getDI();
+        $conf = $di->get('config.ssh');
+
+        if(!isset($conf[$hostName])) {
+            throw new \App\common\Ex('config_key_not_found');
+        }
+
+        $conf = $conf[$hostName];
 
         //TODO chk:host, user, pwd, port
 

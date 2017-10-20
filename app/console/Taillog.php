@@ -49,6 +49,7 @@ class Taillog extends Command
             $cmd .= " | grep '" . $input->getOption('grep') . "'";
         }
 
+        $di = getDI();
         $ssh = \App\server\Main::get('ssh');
         $ssh->handle($cmd, $input->getOption('hostname'));
 
