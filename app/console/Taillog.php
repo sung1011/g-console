@@ -30,6 +30,10 @@ class Taillog extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        //server
+        $di = getDI();
+        $ssh = $di->get('server.ssh');
+
         // get file path
         switch ($input->getOption('type')) {
             case 'error': $date = date('Ymd', strtotime($input->getOption('date')));
@@ -48,9 +52,6 @@ class Taillog extends Command
         if ($input->getOption('grep')) {
             $cmd .= " | grep '" . $input->getOption('grep') . "'";
         }
-
-        $di = getDI();
-        $ssh = \App\server\Main::get('ssh');
         $ssh->handle($cmd, $input->getOption('hostname'));
 
         $output->write($ssh->stdOut());

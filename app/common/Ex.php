@@ -15,7 +15,6 @@ class Ex extends \Exception
 
     private function getErrCode($msg)
     {
-        $di = getDI();
-        return $di->get('config.errcode')[$msg] ?? 0 ;
+        return getDI()->get('config.errcode')[$msg] ?? 0 ;
     }
 }

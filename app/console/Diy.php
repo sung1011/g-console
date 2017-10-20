@@ -25,9 +25,12 @@ class Diy extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $cmd = $input->getArgument('cmd');
+        //server
+        $di = getDI();
+        $ssh = $di->get('server.ssh');
 
-        $ssh = \App\server\Main::get('ssh');
+        //handle
+        $cmd = $input->getArgument('cmd');
         $ssh->handle($cmd, $input->getOption('ssh'));
 
         $output->write($ssh->stdOut());
