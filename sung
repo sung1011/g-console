@@ -1,10 +1,12 @@
 #!/usr/bin/env php
 <?php
 
-if (file_exists(__DIR__.'/../../autoload.php')) {
-    require __DIR__.'/../../autoload.php';//.composer
-} else {
+if (file_exists(__DIR__.'/../../vendor/autoload.php')) {
+    require __DIR__.'/../../vendor/autoload.php';//.composer
+} elseif (file_exists(__DIR__.'/vendor/autoload.php')) {
     require __DIR__.'/vendor/autoload.php';//app
+} else {
+    die("not exists vendor");
 }
 
 

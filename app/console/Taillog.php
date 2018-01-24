@@ -34,21 +34,28 @@ class Taillog extends Command
         $di = getDI();
         $ssh = $di->get('server.ssh');
 
-        // get file path
+        $conf = $di->get('config.const');
+        $log = $conf['path']['master-dev']['log'];
+        
+        //path
         switch ($input->getOption('type')) {
             case 'error': $date = date('Ymd', strtotime($input->getOption('date')));
-                $file = "~/log/error/{$date}/{$input->getOption('subtype')}/error.log";
+                $file = $log . "/error/{$date}/{$input->getOption('subtype')}/error.log";
                 $this->_lineOneRow = 17;
             break;
+
             case 'phpfpm':
-                $file = "~/log/phpfpm/php-fpm.log";
+                $file = $log . "/phpfpm/php-fpm.log";
                 $this->_lineOneRow = 1;
             break;
         }
+
         // tail log
         $cmd = "tail";
         $cmd .= " -n " . $this->getShowLine($input);
         $cmd .= " " . $file;
+
+        //grep
         if ($input->getOption('grep')) {
             $cmd .= " | grep '" . $input->getOption('grep') . "'";
         }

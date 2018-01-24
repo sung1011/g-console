@@ -1,4 +1,5 @@
 App/config/ssh.yml
+App/config/const.yml
 tags
 .tags
 composer.lock

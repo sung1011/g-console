@@ -1,0 +1,4 @@
+path:
+  master-dev:
+    log: "~/log"
+    backend: "~/dev"

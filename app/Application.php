@@ -11,7 +11,7 @@ use Symfony\Component\Yaml\Yaml;
 
 class Application
 {
-    static $container;
+    public static $container;
 
     private static $_instance;
 
@@ -36,6 +36,7 @@ class Application
         $di = getDI();
         //config
         $di->set('config.ssh', Yaml::parse(file_get_contents(__DIR__ . '/config/ssh.yml')));
+        $di->set('config.const', Yaml::parse(file_get_contents(__DIR__ . '/config/const.yml')));
         $di->set('config.errcode', Yaml::parse(file_get_contents(__DIR__ . '/config/errcode.yml')));
         //service
         $loader = new YamlFileLoader($di, new FileLocator(__DIR__ . '/config'));
@@ -54,6 +55,7 @@ class Application
             $di->get('console.demo'),
             $di->get('console.diy'),
             $di->get('console.taillog'),
+            $di->get('console.gl'),
         ]);
 
         // config console
@@ -62,7 +64,7 @@ class Application
         $console->run();
     }
 
-    static function getDI()
+    public static function getDI()
     {
         if (!self::$container) {
             self::$container = new Di;
@@ -70,9 +72,9 @@ class Application
         return self::$container;
     }
 
-    static function getInstance()
+    public static function getInstance()
     {
-        if(!self::$_instance) {
+        if (!self::$_instance) {
             self::$_instance = new self();
         }
         return self::$_instance;
@@ -80,6 +82,5 @@ class Application
 
     private function __clone()
     {
-
     }
 }

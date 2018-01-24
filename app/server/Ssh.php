@@ -30,7 +30,7 @@ class Ssh
         $di = getDI();
         $conf = $di->get('config.ssh');
 
-        if(!isset($conf[$hostName])) {
+        if (!isset($conf[$hostName])) {
             throw new \App\common\Ex('config_key_not_found');
         }
 
@@ -76,7 +76,7 @@ class Ssh
             fclose($this->_stream);
         }
 
-        if(DEBUG) {
+        if (DEBUG) {
             $this->stdAppend($this->getDebug());
         }
     }

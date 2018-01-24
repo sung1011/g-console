@@ -11,5 +11,7 @@ services:
         class: \App\console\Demo
     console.taillog:
         class: \App\console\Taillog
+    console.gl:
+        class: \App\console\Gl
     console.diy:
         class: \App\console\Diy
