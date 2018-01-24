@@ -85,7 +85,8 @@ class Ssh
     {
         $rs = '--------------------debug--------------------' . PHP_EOL;
         $rs .= '[debug] cmd: ' . $this->_cmd . PHP_EOL;
-        $rs .= '[debug] ssh hostname: ' . $this->_hostName . PHP_EOL;
+        $rs .= '[debug] ssh-hostname: ' . $this->_hostName . PHP_EOL;
+        $rs .= '--------------------debug--------------------' . PHP_EOL;
         return $rs;
     }
 

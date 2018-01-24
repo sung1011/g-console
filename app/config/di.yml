@@ -9,9 +9,11 @@ services:
         class: \App\console\Test
     console.demo:
         class: \App\console\Demo
-    console.taillog:
-        class: \App\console\Taillog
+    console.log:
+        class: \App\console\Log
     console.gl:
         class: \App\console\Gl
     console.diy:
         class: \App\console\Diy
+    console.online:
+        class: \App\console\Online

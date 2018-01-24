@@ -6,14 +6,14 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Command\Command;
 
-class Taillog extends Command
+class Log extends Command
 {
     private $_lineOneRow = 1;
 
     protected function configure()
     {
         $this
-        ->setName('taillog')
+        ->setName('log')
 
         ->addOption('hostname', 'hn', InputArgument::OPTIONAL, 'switch host name', 'dev')
         ->addOption('num', 'rn', InputArgument::OPTIONAL, 'show row num', 5)

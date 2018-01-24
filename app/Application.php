@@ -54,8 +54,9 @@ class Application
             $di->get('console.test'),
             $di->get('console.demo'),
             $di->get('console.diy'),
-            $di->get('console.taillog'),
+            $di->get('console.log'),
             $di->get('console.gl'),
+            $di->get('console.online'),
         ]);
 
         // config console
