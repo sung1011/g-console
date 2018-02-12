@@ -1,10 +1,11 @@
 parameters:
+    
 
 services:
     server.ssh:
-        class:  App\server\Ssh
+        class: App\server\Ssh
     console:
-        class:  Symfony\Component\Console\Application
+        class: Symfony\Component\Console\Application
     console.test:
         class: \App\console\Test
     console.demo:
@@ -15,5 +16,9 @@ services:
         class: \App\console\Gl
     console.diy:
         class: \App\console\Diy
+    console.ab:
+        class: \App\console\Ab
     console.online:
         class: \App\console\Online
+    console.catol:
+        class: \App\console\Catol

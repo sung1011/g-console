@@ -16,7 +16,7 @@ class Online extends Command
         ->addOption('hostname', 'hn', InputArgument::OPTIONAL, 'switch host name', 'online')
         ->addOption('branch', 'b', InputArgument::OPTIONAL, 'swap branch', 'dev')
 
-        ->setDescription('git pull')
+        ->setDescription('online op')
 
         ->setHelp('_')
         ;

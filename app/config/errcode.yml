@@ -8,3 +8,5 @@ config_key_not_found : 20002
 # server
 server_file_not_found : 30001
 server_func_not_found : 30002
+
+param_sdk_no_exist : 40001

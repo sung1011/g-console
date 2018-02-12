@@ -2,11 +2,12 @@
 namespace App;
 
 // use Pimple\Container; // pimple is too simple and not grace, Symfony/Dependency-Injection is better ! abandon it(pimple) !    T.T
-use Symfony\Component\Console\Application as Symfonyconsole;
+// use Symfony\Component\Console\Application as Symfonyconsole;
 use Symfony\Component\DependencyInjection\ContainerBuilder as Di;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\Loader\DirectoryLoader;
+use Symfony\Component\Console\CommandLoader\FactoryCommmandLoader;
 use Symfony\Component\Yaml\Yaml;
 
 class Application
@@ -41,8 +42,6 @@ class Application
         //service
         $loader = new YamlFileLoader($di, new FileLocator(__DIR__ . '/config'));
         $loader->load('di.yml');
-
-        //throw new common\Ex('test_ex');
     }
 
     private function initConsole()
@@ -50,14 +49,8 @@ class Application
         $di = getDI();
         // set in console
         $console = $di->get('console');
-        $console->addCommands([
-            $di->get('console.test'),
-            $di->get('console.demo'),
-            $di->get('console.diy'),
-            $di->get('console.log'),
-            $di->get('console.gl'),
-            $di->get('console.online'),
-        ]);
+
+        $console->addCommands($this->getServiceByPre('console.'));
 
         // config console
         $console->setCatchExceptions(false);
@@ -65,10 +58,29 @@ class Application
         $console->run();
     }
 
+    private function getServiceIdsByPre($prefix)
+    {
+        $di = getDI();
+        return array_filter($di->getServiceIds(), function ($e) use ($prefix) {
+            if (strpos($e, $prefix) === 0) {
+                return $e;
+            }
+        });
+    }
+
+    private function getServiceByPre($prefix)
+    {
+        $ids = $this->getServiceIdsByPre($prefix);
+        $di = getDI();
+        return array_map(function ($id) use ($di) {
+            return $di->get($id);
+        }, $ids);
+    }
+
     public static function getDI()
     {
         if (!self::$container) {
-            self::$container = new Di;
+            self::$container = new Di();
         }
         return self::$container;
     }
