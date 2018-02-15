@@ -36,7 +36,27 @@ class Catol extends Command
 
         $ret = $this->doCurl();
 
+        $ret = $this->format($input, $ret);
+
         $output->write($ret);
+    }
+
+    private function format($input, $ret)
+    {
+        $arr = json_decode($ret, true);
+
+        if (is_null($arr)) {
+            throw new \App\common\Ex('json_error', $ret);
+        }
+
+        if ($input->hasArgument('field')) {
+            $field = $input->getArgument('field');
+            if (!isset($arr[$field])) {
+                throw new \App\common\Ex('param_error', ['field'=>$field]);
+            } else {
+                return json_encode($arr[$field]);
+            }
+        }
     }
 
     private function register($input)
@@ -52,7 +72,7 @@ class Catol extends Command
         $sdkMap = $this->_const['master-sdk'];
         foreach ($sdkMap as $sdk => $v) {
             if ($this->_sec >= $v[0] && $this->_sec <= $v[1]) {
-                $this->_sdk =  'ios';
+                $this->_sdk =  $sdk;
                 break;
             }
         }
