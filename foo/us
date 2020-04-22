@@ -1,5 +1,5 @@
 aaa
-cc
+cczzz
 59 23 * * * root /usr/local/php/bin/php /mnt/htdocs/tools/scripts/statis.php 2>/mnt/htdocs/logs/statis.err > /mnt/htdocs/logs/statis.log
 zzz
 ,,,
