@@ -1,3 +1,4 @@
+aaa
 59 23 * * * root /usr/local/php/bin/php /mnt/htdocs/tools/scripts/statis.php 2>/mnt/htdocs/logs/statis.err > /mnt/htdocs/logs/statis.log
 30 4 * * * root /usr/local/php/bin/php /mnt/htdocs/tools/scripts/clearRcExpireLog.php 2>/mnt/htdocs/logs/clearRc.err > /mnt/htdocs/logs/clearRc.log
 0 * * * * root /usr/local/php/bin/php /mnt/htdocs/tools/scripts/users.php 2>/mnt/htdocs/logs/statisusers.err > /mnt/htdocs/logs/statisusers.log
