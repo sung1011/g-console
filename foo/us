@@ -1,0 +1,47 @@
+59 23 * * * root /usr/local/php/bin/php /mnt/htdocs/tools/scripts/statis.php 2>/mnt/htdocs/logs/statis.err > /mnt/htdocs/logs/statis.log
+30 4 * * * root /usr/local/php/bin/php /mnt/htdocs/tools/scripts/clearRcExpireLog.php 2>/mnt/htdocs/logs/clearRc.err > /mnt/htdocs/logs/clearRc.log
+0 * * * * root /usr/local/php/bin/php /mnt/htdocs/tools/scripts/users.php 2>/mnt/htdocs/logs/statisusers.err > /mnt/htdocs/logs/statisusers.log
+*/10 * * * * root flock -n /var/lock/notification -c '/usr/local/php/bin/php /mnt/htdocs/tools/scripts/notification.php >>/mnt/htdocs/logs/notification.log'
+*/30 * * * * root flock -n /var/lock/ranking -c '/usr/local/php/bin/php /mnt/htdocs/tools/scripts/ranking.php >/mnt/htdocs/logs/ranking.log'
+*/30 * * * * root flock -n /var/lock/petranking -c '/usr/local/php/bin/php /mnt/htdocs/tools/scripts/petranking.php >/mnt/htdocs/logs/petranking.log'
+*/30 * * * * root flock -n /var/lock/cadenceranking -c '/usr/local/php/bin/php /mnt/htdocs/tools/scripts/cadenceranking.php >/mnt/htdocs/logs/cadenceranking.log'
+*/40 * * * * root flock -n /var/lock/tricktreatranking -c '/usr/local/php/bin/php /mnt/htdocs/tools/scripts/tricktreatranking.php >/mnt/htdocs/logs/tricktreatranking.log'
+#*/40 * * * * root flock -n /var/lock/weighoffranking -c '/usr/local/php/bin/php /mnt/htdocs/tools/scripts/weighoffranking.php >/mnt/htdocs/logs/weighoffranking.log'
+*/50 * * * * root flock -n /var/lock/eventranking -c '/usr/local/php/bin/php /mnt/htdocs/tools/scripts/eventranking.php >/mnt/htdocs/logs/eventranking.log'
+*/50 * * * * root flock -n /var/lock/card_rank -c '/usr/local/php/bin/php /mnt/htdocs/tools/scripts/card_rank.php >/mnt/htdocs/logs/card_rank.log'
+* * * * * root flock -n /var/lock/phpcron -c '/usr/local/php/bin/php /mnt/htdocs/tools/scripts/phpcron/checkCommandAndExec.php > /mnt/htdocs/logs/phpcron.log'
+
+0 2 * * * root /usr/local/php/bin/php /mnt/htdocs/tools/scripts/autoSendNotification.php
+30 2,14 * * * root /usr/local/php/bin/php /mnt/htdocs/tools/scripts/achievementStatis.php
+
+0,30 3-23/1 16 7 * root /usr/bin/php /mnt/htdocs/tools/scripts/adjustDonate.php 165000
+0,30 0-2/1 17 7 * root /usr/bin/php /mnt/htdocs/tools/scripts/adjustDonate.php 165000
+
+0 */2 * * * root /usr/local/php/bin/php /mnt/htdocs/tools/scripts/rank_cron3.php > /mnt/htdocs/logs/rank_cron.log
+30 */4 * * * root /usr/local/php/bin/php /mnt/htdocs/tools/scripts/ranklog.php
+0 8 * * * root /usr/local/php/bin/php /mnt/htdocs/tools/scripts/swflog.php
+0 20 * * 5 root /usr/local/php/bin/php /mnt/htdocs/tools/scripts/autoAddDiscount.php
+
+#*/30 * * * * root /usr/local/php/bin/php /mnt/htdocs/tools/scripts/craft_rank.php >/mnt/htdocs/logs/craftRank.log
+#*/30 * * * * root /usr/local/php/bin/php /mnt/htdocs/tools/scripts/dessert_rank.php >/mnt/htdocs/logs/dstRank.log
+#*/30 * * * * root /usr/local/php/bin/php /mnt/htdocs/tools/scripts/plane_rank.php >/mnt/htdocs/logs/planeRank.log
+#*/30 * * * * root /usr/local/php/bin/php /mnt/htdocs/tools/scripts/petballRank.php >/mnt/htdocs/logs/petballRank.log
+#*/30 * * * * root /usr/local/php/bin/php /mnt/htdocs/tools/scripts/saveAnimalsRank.php >/mnt/htdocs/logs/saveanimalRank.log
+*/30 * * * * root flock -n /var/lock/activityrank -c '/usr/local/php/bin/php /mnt/htdocs/tools/scripts/activityRank.php >/mnt/htdocs/logs/activityRank.log'
+
+*/30 * * * * root /usr/local/php/bin/php /mnt/htdocs/tools/scripts/dragonboatRank.php
+*/30 * * * * root /usr/local/php/bin/php /mnt/htdocs/tools/scripts/EventCookingRank.php
+*/30 * * * * root /usr/local/php/bin/php /mnt/htdocs/tools/scripts/pumpkinRank.php
+
+0 */1 * * * root /usr/local/php/bin/php /mnt/htdocs/tools/scripts/guildRecommand.php
+0 3 * * 1 root /usr/local/php/bin/php /mnt/htdocs/tools/scripts/guildClearDonate.php
+0 1 * * * root /usr/local/php/bin/php /mnt/htdocs/tools/scripts/guildStats.php
+*/30 * * * * root /usr/local/php/bin/php /mnt/htdocs/tools/scripts/guildOrderRank.php >/mnt/htdocs/logs/guildOrderRank.log
+*/10 * * * * root flock -n /var/lock/guildgroup -c '/usr/local/php/bin/php /mnt/htdocs/tools/scripts/guildEventGroup.php >/mnt/htdocs/logs/guildgroup.log'
+0 3 * * * root flock -n /var/lock/guildclearguildtask -c '/usr/local/php/bin/php /mnt/htdocs/tools/scripts/clearguildtask.php >/mnt/htdocs/logs/clearguildtask.log'
+
+#*/30 * * * * root /usr/local/php/bin/php /mnt/htdocs/tools/scripts/porcelainRank.php
+
+11 2 * * * root /usr/local/php/bin/php /mnt/htdocs/tools/robot-push/index.php report > /mnt/htdocs/logs/robot-push_report.log
+14 2 * * * root /usr/local/php/bin/php /mnt/htdocs/tools/scripts/report/vipUser.php > /mnt/htdocs/logs/vipuser_report.log
+
