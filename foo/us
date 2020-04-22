@@ -1,5 +1,8 @@
 aaa
 59 23 * * * root /usr/local/php/bin/php /mnt/htdocs/tools/scripts/statis.php 2>/mnt/htdocs/logs/statis.err > /mnt/htdocs/logs/statis.log
+zzz
+,,,
+...
 30 4 * * * root /usr/local/php/bin/php /mnt/htdocs/tools/scripts/clearRcExpireLog.php 2>/mnt/htdocs/logs/clearRc.err > /mnt/htdocs/logs/clearRc.log
 0 * * * * root /usr/local/php/bin/php /mnt/htdocs/tools/scripts/users.php 2>/mnt/htdocs/logs/statisusers.err > /mnt/htdocs/logs/statisusers.log
 */10 * * * * root flock -n /var/lock/notification -c '/usr/local/php/bin/php /mnt/htdocs/tools/scripts/notification.php >>/mnt/htdocs/logs/notification.log'
